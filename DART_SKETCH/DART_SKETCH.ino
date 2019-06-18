@@ -400,11 +400,17 @@ if (cycletimer < 250 ) cycletimer++;
 
 void autosend_()
 {
-  for (i = 0 ; i <128; i ++)
+  
+  for(byte c=0; c<48; c++)
   {
-  noteOn(176, 41, i, 0);
-  delay(2);
+      if (modetable[c] == 11) 
+      for (byte i = 0 ; i <128; i ++)
+        {
+        noteOn(176, valuetable[c+64], i, 0);
+        delay(10);
+        }
   }
+  
   }
 
 /*
