@@ -20,6 +20,7 @@
 #define MIDI_IN_block 0              // 1 = MIDI IN blocked
 #define MIDI_OUT_block 0             // 1 = MIDI out blocked
 #define MIDI_thru 1                  // 1 = MIDI Thru active
+#define autosend 1
 
 //---------------------------------------------
 
@@ -373,8 +374,9 @@ if (cycletimer < 250 ) cycletimer++;
     #endif
  
  
- 
-  
+ #if (autosend == 1)
+  autosend_();
+  #endif
       
   pageswitch();
     
@@ -396,7 +398,14 @@ if (cycletimer < 250 ) cycletimer++;
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////7
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+void autosend_()
+{
+  for (i = 0 ; i <128; i ++)
+  {
+  noteOn(176, 41, i, 0);
+  delay(2);
+  }
+  }
 
 /*
 void test1() // startup test code
